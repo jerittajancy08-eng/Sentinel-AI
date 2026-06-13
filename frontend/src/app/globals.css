@@ -1,0 +1,105 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Surfaces */
+  --bg:           #0A0E1A;
+  --bg-elevated:  #0F1626;
+  --surface:      #141C2F;
+  --surface-2:    #1B2538;
+  --border:       #26324A;
+  --border-soft:  #1E2A40;
+
+  /* Text */
+  --text-primary:   #E9EDF7;
+  --text-secondary: #9AA6BF;
+  --text-muted:     #6B7894;
+
+  /* Brand */
+  --signal:       #F2A93B;   /* sentinel beacon amber */
+  --signal-glow:  rgba(242, 169, 59, 0.18);
+  --agent-cyan:   #5FE3D0;   /* agent-active accent */
+  --agent-cyan-glow: rgba(95, 227, 208, 0.18);
+
+  /* Risk scale */
+  --risk-critical: #F0526B;
+  --risk-high:     #F2864E;
+  --risk-medium:   #F2A93B;
+  --risk-low:      #6FD68C;
+  --risk-safe:     #4ADE80;
+
+  /* Radii */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: var(--text-primary);
+  background: var(--bg);
+  font-family: "Inter", -apple-system, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-display {
+  font-family: "Space Grotesk", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  letter-spacing: -0.01em;
+}
+
+.font-mono {
+  font-family: "IBM Plex Mono", "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace;
+}
+
+/* Subtle scanline texture for the hero / panels */
+.scan-grid {
+  background-image:
+    linear-gradient(rgba(95, 227, 208, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(95, 227, 208, 0.035) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.4; }
+  50%      { opacity: 1; }
+}
+
+@keyframes dash-flow {
+  to { stroke-dashoffset: -24; }
+}
+
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-rise {
+  animation: rise-in 0.4s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-rise, .animate-pulse-glow, * {
+    animation-duration: 0.01ms !important;
+  }
+}
+
+/* Focus visibility */
+a:focus-visible, button:focus-visible, textarea:focus-visible, input:focus-visible {
+  outline: 2px solid var(--agent-cyan);
+  outline-offset: 2px;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+

@@ -1,0 +1,78 @@
+{
+  "campaigns": [
+    {
+      "id": "KYC-001",
+      "name": "Bank KYC Phishing",
+      "keywords": ["kyc", "account suspended", "verify your account", "bank account", "update details"],
+      "description": "Impersonates banks asking users to re-verify KYC details via fake links.",
+      "threat_level": "HIGH",
+      "source": "RBI Threat Intelligence 2024"
+    },
+    {
+      "id": "LOTTERY-001",
+      "name": "Lottery / Prize Scam",
+      "keywords": ["won", "winner", "prize", "claim your reward", "lottery", "congratulations", "₹", "lakhs", "crore"],
+      "description": "Fake prize notifications demanding fees before releasing winnings.",
+      "threat_level": "HIGH",
+      "source": "Cybercrime.gov.in DB"
+    },
+    {
+      "id": "JOB-001",
+      "name": "Fake Job Offer",
+      "keywords": ["job offer", "work from home", "earn daily", "part time", "hiring", "₹500 per task", "registration fee"],
+      "description": "Fake HR recruiters collecting personal data or upfront 'registration' fees.",
+      "threat_level": "HIGH",
+      "source": "CERT-In Advisory 2024"
+    },
+    {
+      "id": "INVEST-001",
+      "name": "Investment / Crypto Scam",
+      "keywords": ["guaranteed returns", "double your money", "crypto investment", "forex trading", "profit", "300%", "risk free"],
+      "description": "Fraudulent investment schemes promising unrealistic guaranteed returns.",
+      "threat_level": "CRITICAL",
+      "source": "SEBI Fraud Watch 2024"
+    },
+    {
+      "id": "OTP-001",
+      "name": "OTP / SIM Swap Fraud",
+      "keywords": ["otp", "one time password", "share otp", "sim", "mobile number", "verify otp", "do not share"],
+      "description": "Social engineering to extract OTPs for unauthorized transactions.",
+      "threat_level": "CRITICAL",
+      "source": "TRAI Alert 2024"
+    },
+    {
+      "id": "DELIVERY-001",
+      "name": "Fake Delivery Notification",
+      "keywords": ["package", "delivery failed", "parcel", "courier", "track your order", "customs fee", "pay to release"],
+      "description": "Fake courier notifications requiring payment to release packages.",
+      "threat_level": "MEDIUM",
+      "source": "India Post Fraud Report"
+    },
+    {
+      "id": "GOVT-001",
+      "name": "Government Impersonation",
+      "keywords": ["income tax", "aadhaar", "pan card", "government notice", "legal action", "court summons", "police"],
+      "description": "Scammers impersonating IT dept, police, or UIDAI to extort money.",
+      "threat_level": "CRITICAL",
+      "source": "MHA Cybercrime Report 2024"
+    },
+    {
+      "id": "PHISH-001",
+      "name": "Credential Phishing",
+      "keywords": ["login", "password", "click here", "verify now", "account access", "secure your account", "suspicious activity"],
+      "description": "Phishing pages mimicking real services to steal login credentials.",
+      "threat_level": "HIGH",
+      "source": "CERT-In Phishing DB"
+    }
+  ],
+  "suspicious_domains": [
+    "bit.ly", "tinyurl.com", "t.co", "goo.gl", "ow.ly",
+    "secure-bank-verify.com", "claim-prize-now.in", "kyc-update.net",
+    "income-tax-refund.in", "gov-notice.online"
+  ],
+  "brand_impersonation_targets": [
+    "SBI", "HDFC", "ICICI", "Axis Bank", "PayTM", "PhonePe",
+    "Google", "Amazon", "Flipkart", "IRCTC", "Aadhaar", "UIDAI",
+    "Income Tax Department", "RBI", "SEBI", "TRAI"
+  ]
+}
