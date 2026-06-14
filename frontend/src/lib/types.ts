@@ -96,3 +96,28 @@ export interface KbStats {
   brand_targets_tracked: number;
 }
 
+/** Plain-language labels for risk levels — shown instead of raw enum values. */
+export const RISK_LEVEL_LABELS: Record<string, string> = {
+  CRITICAL: "Very High Risk",
+  HIGH: "High Risk",
+  MEDIUM: "Medium Risk",
+  LOW: "Low Risk",
+  SAFE: "Looks Safe",
+};
+
+/** Plain-language labels for verdicts — shown instead of raw enum values. */
+export const VERDICT_LABELS: Record<string, string> = {
+  SCAM: "This looks like a scam",
+  "LIKELY SCAM": "Likely a scam",
+  SUSPICIOUS: "Suspicious — be careful",
+  "LIKELY SAFE": "Probably safe",
+  SAFE: "Looks safe",
+};
+
+/** Plain-language labels for confidence levels. */
+export const CONFIDENCE_LABELS: Record<string, string> = {
+  HIGH: "We're fairly confident in this",
+  MEDIUM: "We're somewhat confident in this",
+  LOW: "We're not very confident — worth double-checking",
+};
+

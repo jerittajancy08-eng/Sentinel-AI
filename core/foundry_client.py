@@ -186,28 +186,28 @@ class FoundryLLMClient:
         # Per-agent flavour
         flavours = {
             "ContentAgent": {
-                "evidence_prefix": "Linguistic marker",
-                "reasoning": f"Text contains {len(matched)} high-risk linguistic patterns associated with social engineering.",
+                "evidence_prefix": "Suspicious wording found",
+                "reasoning": f"Found {len(matched)} word(s)/phrase(s) commonly used to create urgency or pressure people into acting fast.",
             },
             "PatternAgent": {
-                "evidence_prefix": "Pattern match",
-                "reasoning": "Message structure matches documented scam templates in the Sentinel pattern library.",
+                "evidence_prefix": "Matches a known scam phrase",
+                "reasoning": "The way this message is written matches patterns seen in known scam messages.",
             },
             "KnowledgeAgent": {
-                "evidence_prefix": "Threat intel hit",
-                "reasoning": "Cross-referenced against Sentinel threat intelligence database — known campaign signatures detected.",
+                "evidence_prefix": "Matches a known scam type",
+                "reasoning": "This message resembles scam campaigns we have on record.",
             },
             "IdentityAgent": {
-                "evidence_prefix": "Identity flag",
-                "reasoning": "Sender profile and contact metadata show spoofing indicators and brand impersonation.",
+                "evidence_prefix": "Sender looks suspicious",
+                "reasoning": "Details about who sent this message don't look fully trustworthy.",
             },
         }
 
         flavour = flavours.get(agent_name, {"evidence_prefix": "Flag", "reasoning": "Suspicious content detected."})
-        evidence = [f"{flavour['evidence_prefix']}: '{m}'" for m in matched[:3]]
+        evidence = [f"{flavour['evidence_prefix']}: \u201c{m}\u201d" for m in matched[:3]]
 
         if not evidence:
-            evidence = ["No strong scam signals detected"]
+            evidence = ["Nothing suspicious found"]
             score = max(score, 5)
 
         return {

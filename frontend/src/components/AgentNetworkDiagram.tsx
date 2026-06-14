@@ -151,7 +151,7 @@ export default function AgentNetworkDiagram({
           fontSize="9"
           letterSpacing="0.05em"
         >
-          DISPATCHES IN PARALLEL
+          SENDS TO ALL 4 AGENTS AT ONCE
         </text>
       </g>
 
@@ -203,7 +203,7 @@ export default function AgentNetworkDiagram({
                 fontSize="10"
                 letterSpacing="0.08em"
               >
-                STANDBY
+                WAITING
               </text>
             )}
             {status === "running" && (
@@ -218,7 +218,7 @@ export default function AgentNetworkDiagram({
                 letterSpacing="0.08em"
                 style={{ animation: "pulse-glow 1.4s ease-in-out infinite" }}
               >
-                ANALYZING…
+                Checking…
               </text>
             )}
             {status === "completed" && score !== undefined && (
@@ -233,11 +233,11 @@ export default function AgentNetworkDiagram({
                   x={NODE_X[id] - 38}
                   y={NODE_Y + 14}
                   dominantBaseline="middle"
-                  className="font-mono"
+                  className="font-display"
                   fill="var(--text-secondary)"
                   fontSize="10"
                 >
-                  RISK
+                  Score
                 </text>
                 <text
                   x={NODE_X[id] + 35}
@@ -305,10 +305,9 @@ export default function AgentNetworkDiagram({
           y={JUDGE_Y + 12}
           textAnchor="middle"
           dominantBaseline="middle"
-          className="font-mono"
+          className="font-display"
           fill={judgeStatus === "running" ? "var(--agent-cyan)" : "var(--text-muted)"}
-          fontSize="10"
-          letterSpacing="0.06em"
+          fontSize="11"
           style={
             judgeStatus === "running"
               ? { animation: "pulse-glow 1.4s ease-in-out infinite" }
@@ -316,10 +315,10 @@ export default function AgentNetworkDiagram({
           }
         >
           {judgeStatus === "running"
-            ? "WEIGHING EVIDENCE…"
+            ? "Reviewing all 4 results…"
             : judgeStatus === "completed"
-            ? "VERDICT ISSUED"
-            : "AWAITING EVIDENCE"}
+            ? "Decision made"
+            : "Waiting for results"}
         </text>
       </g>
 
@@ -335,12 +334,11 @@ export default function AgentNetworkDiagram({
           x={JUDGE_X + 16}
           y={JUDGE_Y + 86}
           dominantBaseline="middle"
-          className="font-mono"
+          className="font-display"
           fill={verdictReady ? "var(--signal)" : "var(--text-muted)"}
-          fontSize="11"
-          letterSpacing="0.08em"
+          fontSize="12"
         >
-          {verdictReady ? "SCAM RISK REPORT READY" : "REPORT PENDING"}
+          {verdictReady ? "Report ready below ↓" : "Report will appear below"}
         </text>
       </g>
     </svg>

@@ -67,19 +67,19 @@ def _local_pattern_scan(text: str) -> tuple[int, list[str], list[str]]:
     # URL check
     urls = URL_PATTERN.findall(text)
     if urls:
-        evidence.append(f"Suspicious URL detected: {urls[0][:60]}")
+        evidence.append(f"Contains a shortened/suspicious link: {urls[0][:60]}")
         score += 20
 
     # Phone numbers
     phones = PHONE_PATTERN.findall(text)
     if phones:
-        evidence.append(f"Phone number in message (common in scams): {phones[0]}")
+        evidence.append(f"Includes a phone number ({phones[0]}) — common in scam messages")
         score += 8
 
     # Monetary amounts
     amount_match = AMOUNT_PATTERN.search(text)
     if amount_match:
-        evidence.append(f"Monetary amount mentioned: {amount_match.group(0).strip()}")
+        evidence.append(f"Mentions a money amount: {amount_match.group(0).strip()}")
         score += 10
 
     # Template matching
@@ -87,7 +87,7 @@ def _local_pattern_scan(text: str) -> tuple[int, list[str], list[str]]:
         hits = [kw for kw in keywords if kw in text_lower]
         if len(hits) >= 2:
             templates.append(template_name)
-            evidence.append(f"Matches '{template_name}' template — triggers: {', '.join(hits[:3])}")
+            evidence.append(f"Looks like a \u201c{template_name}\u201d — similar wording: {', '.join(hits[:3])}")
             score += 22
         elif len(hits) == 1:
             score += 6

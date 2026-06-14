@@ -138,27 +138,45 @@ def _fallback_aggregate(agent_results: list[AgentResult]) -> dict:
             "Verify sender identity if any action is requested",
         ]
 
-    reasoning_parts = []
-    for r in agent_results:
-        reasoning_parts.append(
-            f"{r.agent_name} reported a risk score of {r.risk_score} "
-            f"(confidence {r.confidence}) based on {len(r.evidence)} evidence item(s)."
+    high_agents = [r.agent_name.replace(" Agent", "") for r in agent_results if r.risk_score >= 70]
+    low_agents = [r.agent_name.replace(" Agent", "") for r in agent_results if r.risk_score < 40]
+
+    if final_score >= 80:
+        reasoning = (
+            f"This message shows strong signs of a scam. "
+            f"{', '.join(high_agents)} all found multiple red flags — "
+            f"things like urgent threats, suspicious links, and a message "
+            f"style that matches known scam campaigns. "
+            f"When several independent checks agree this strongly, "
+            f"it's a clear warning sign."
         )
-    reasoning_parts.append(
-        f"Confidence-weighted aggregation across {len(agent_results)} agents produced a "
-        f"final score of {final_score}."
-    )
-    if high_risk_count >= 2:
-        reasoning_parts.append(
-            f"{high_risk_count} agents independently flagged high risk (≥70), "
-            f"increasing confidence in the SCAM classification."
+    elif final_score >= 50:
+        reasoning = (
+            f"This message has some warning signs worth paying attention to. "
+            f"{', '.join(high_agents) if high_agents else 'A few checks'} flagged "
+            f"unusual patterns, though not every check agreed — so we'd call "
+            f"this suspicious rather than a confirmed scam. Worth double-checking "
+            f"before taking any action."
+        )
+    elif final_score >= 20:
+        reasoning = (
+            f"This message looks mostly normal, but a few small details stood "
+            f"out enough to mention. Nothing here strongly suggests a scam, "
+            f"but it's still good practice to verify before sharing personal "
+            f"information."
+        )
+    else:
+        reasoning = (
+            f"This message doesn't show the patterns we typically associate "
+            f"with scams — no urgent threats, suspicious links, or "
+            f"impersonation signals were found. It looks safe."
         )
 
     return {
         "final_score": final_score,
         "scam_category": scam_category,
         "evidence": deduped_evidence,
-        "reasoning": " ".join(reasoning_parts),
+        "reasoning": reasoning,
         "recommendations": recommendations,
     }
 

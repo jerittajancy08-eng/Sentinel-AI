@@ -160,7 +160,7 @@ export default function Home() {
               onChange={(e) => setText(e.target.value)}
               placeholder="Paste suspicious message text here…"
               rows={7}
-              className="w-full rounded-[var(--radius-md)] border border-[var(--border)] bg-[var(--surface)] p-4 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] font-mono leading-relaxed resize-none focus:border-[var(--agent-cyan)]"
+              className="w-full rounded-[var(--radius-md)] border border-[var(--border)] bg-[var(--surface)] p-4 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] leading-relaxed resize-none focus:border-[var(--agent-cyan)]"
             />
 
             <div className="mt-4 flex items-center gap-3 flex-wrap">
@@ -178,16 +178,16 @@ export default function Home() {
 
               {phase === "investigating" && (
                 <span
-                  className="font-mono text-xs text-[var(--agent-cyan)]"
+                  className="text-xs text-[var(--agent-cyan)]"
                   style={{ animation: "pulse-glow 1.4s ease-in-out infinite" }}
                 >
-                  4 agents working in parallel…
+                  4 agents are checking this now…
                 </span>
               )}
             </div>
 
             {errorMsg && (
-              <p className="mt-4 text-sm text-[var(--risk-critical)] font-mono">
+              <p className="mt-4 text-sm text-[var(--risk-critical)]">
                 {errorMsg}
               </p>
             )}
@@ -251,11 +251,11 @@ export default function Home() {
           ) : (
             <div className="rounded-[var(--radius-lg)] border border-[var(--border)] bg-[var(--surface)] p-8 text-center">
               <p
-                className="font-mono text-sm text-[var(--agent-cyan)]"
+                className="text-sm text-[var(--agent-cyan)]"
                 style={{ animation: "pulse-glow 1.4s ease-in-out infinite" }}
               >
-                Agents are analyzing the message — results will appear as
-                each agent completes…
+                Checking the message now — results will show up below as
+                each agent finishes…
               </p>
             </div>
           )}

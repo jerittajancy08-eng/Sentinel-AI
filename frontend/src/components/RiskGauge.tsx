@@ -1,5 +1,7 @@
 "use client";
 
+import { RISK_LEVEL_LABELS } from "@/lib/types";
+
 interface RiskGaugeProps {
   score: number;
   riskLevel: string;
@@ -19,6 +21,7 @@ export default function RiskGauge({ score, riskLevel }: RiskGaugeProps) {
   const clamped = Math.max(0, Math.min(100, score));
   const offset = circumference * (1 - clamped / 100);
   const color = riskColor(clamped);
+  const label = RISK_LEVEL_LABELS[riskLevel] ?? riskLevel;
 
   return (
     <div className="relative w-44 h-44 shrink-0">
@@ -44,18 +47,18 @@ export default function RiskGauge({ score, riskLevel }: RiskGaugeProps) {
           style={{ transition: "stroke-dashoffset 0.8s ease-out" }}
         />
       </svg>
-      <div className="absolute inset-0 flex flex-col items-center justify-center">
-        <span className="font-mono text-4xl font-bold" style={{ color }}>
+      <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
+        <span className="font-display text-4xl font-bold" style={{ color }}>
           {clamped}
         </span>
-        <span className="font-mono text-xs tracking-widest text-[var(--text-muted)] mt-1">
-          / 100
+        <span className="text-xs text-[var(--text-muted)] mt-1">
+          out of 100
         </span>
         <span
           className="font-display text-xs font-semibold tracking-wide mt-2 px-2 py-0.5 rounded-full"
           style={{ color, backgroundColor: `${color}1A` }}
         >
-          {riskLevel}
+          {label}
         </span>
       </div>
     </div>
